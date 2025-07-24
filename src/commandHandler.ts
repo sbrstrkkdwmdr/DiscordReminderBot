@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import { admin, fun, gen, } from './commandHelper';
+import { admin, misc, gen, } from './commandHelper';
 import { Command, InputHandler } from './commands/command';
 import * as helper from './helper';
 import * as checks from './tools/checks';
@@ -169,29 +169,17 @@ export class CommandHandler extends InputHandler {
             case 'stats':
                 this.selected = new gen.Stats();
                 break;
-            case 'clear':
-                this.selected = new admin.Clear();
-                break;
-            case 'debug':
-                this.selected = new admin.Debug();
-                break;
-            case 'find': case 'get':
-                this.selected = new admin.Find();
-                break;
             case 'leaveguild': case 'leave':
                 this.selected = new admin.LeaveGuild();
                 break;
             case 'prefix':
                 this.selected = new admin.Prefix();
                 break;
-            case 'servers':
-                this.selected = new admin.Servers();
-                break;
 
 
             // // misc
-            case 'roll': case 'rng': case 'randomnumber': case 'randomnumbergenerator': case 'pickanumber': case 'pickanum':
-                this.selected = new fun.Roll();
+            case 'remind': case 'reminder':
+                this.selected = new misc.Remind();
                 break;
             default:
                 this.selected = null;
