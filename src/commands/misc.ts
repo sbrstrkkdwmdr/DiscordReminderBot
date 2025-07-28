@@ -61,10 +61,7 @@ export class Remind extends Command {
 
         if (this.params.list) {
             const useReminders = helper.vars.reminders.filter(x => `${x.userID}` === `${this.commanduser.id}`);
-            reminder.setDescription(useReminders.length > 0 ?
-                useReminders.map(x => `Reminder sending <t:${x.time}:R>: ${x.text}`).join('\n').slice(0, 2000)
-                : 'You have no reminders'
-            );
+            reminder.setDescription(this.formatReminders(useReminders));
             this.ctn.embeds = [reminder];
         } else {
             const absTime = Math.floor(((new Date().getTime()) + calculate.timeToMs(this.params.time)) / 1000);
@@ -73,6 +70,28 @@ export class Remind extends Command {
         }
         this.send();
     }
+    formatReminders(reminders: bottypes.reminder[]) {
+        let text: string[] = [];
+        for (const reminder of reminders) {
+            let temp = `Reminder sending <t:${reminder.time}:R>: `;
+            if (reminder.text.length > 10) {
+                temp += reminder.text.slice(0, 7) + '...';
+            } else {
+                temp += reminder.text;
+            }
+            text.push(temp);
+        }
+        if (text.length > 10) {
+            const temp = text;
+            text = text.slice(0, 10);
+            text.push('...');
+        }
+        if (text.length == 0) {
+            text.push('You have no reminders');
+        }
+        return text.join('\n');
+    }
+
 
     async sendremind(reminder: Discord.Embed | Discord.EmbedBuilder, time: string, sendchannel: boolean, remindertxt: string, absTime: number) {
         helper.vars.reminders.push({
