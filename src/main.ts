@@ -43,7 +43,7 @@ helper.vars.client = client;
 client.once('ready', () => {
     const currentDate = new Date();
     const timetostart = currentDate.getTime() - initdate.getTime();
-    log.stdout(`
+    console.log(`
 ====================================================
 BOT IS NOW ONLINE
 ----------------------------------------------------
@@ -57,7 +57,7 @@ Client ID:        ${client.user.id}
 `);
 
     if (!fs.existsSync(`${helper.vars.path.precomp}/config/osuauth.json`)) {
-        log.stdout(`Creating ${helper.vars.path.precomp}/config/osuauth.json`);
+        console.log(`Creating ${helper.vars.path.precomp}/config/osuauth.json`);
         fs.writeFileSync(`${helper.vars.path.precomp}/config/osuauth.json`,
             '{"token_type": "Bearer", "expires_in": 1, "access_token": "blahblahblah"}', 'utf-8');
     }
