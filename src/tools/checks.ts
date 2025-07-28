@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as helper from '../helper';
 import * as path from '../path';
 import * as bottypes from '../types/bot';
+import * as log from './log';
 
 export function checkConfig() {
     const config = JSON.parse(fs.readFileSync(path.precomp + '/config/config.json', 'utf-8'));

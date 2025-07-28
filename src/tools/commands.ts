@@ -458,7 +458,7 @@ export function disableAllButtons(msg: Discord.Message) {
 }
 
 export function getCommand(query: string): bottypes.commandInfo {
-    return helper.vars.commandData.cmds.find(
+    return helper.commandData.cmds.find(
         x => x.aliases.concat([x.name]).includes(query)
     );
 
@@ -466,7 +466,7 @@ export function getCommand(query: string): bottypes.commandInfo {
 }
 
 export function getCommands(query?: string): bottypes.commandInfo[] {
-    return helper.vars.commandData.cmds.filter(
+    return helper.commandData.cmds.filter(
         x => x.category.includes(query)
-    ) ?? helper.vars.commandData.cmds;
+    ) ?? helper.commandData.cmds;
 }

@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 import fs from 'fs';
 import * as helper from '../helper';
 import * as tooltypes from '../types/tools';
-
+import * as log from './log';
 export function appendUrlParamsString(url: string, params: string[]) {
     let temp = url;
     for (let i = 0; i < params.length; i++) {
@@ -28,7 +28,7 @@ export function debug(data: any, type: string, name: string, serverId: string | 
     }
     try {
         if (data?.input?.config) {
-            data.helper.vars.config = helper.tools.other.censorConfig();
+            data.helper.vars.config = censorConfig();
         }
         fs.writeFileSync(`${helper.vars.path.main}/cache/debug/${type}/${name}/${pars}_${serverId}.json`, JSON.stringify(data, null, 2));
     } catch (error) {
@@ -130,7 +130,7 @@ export function ubitflagsAsName(flags: Discord.UserFlagsBitField) {
 
 export function userbitflagsToEmoji(flags: Discord.UserFlagsBitField) {
     const temp = flags.toArray();
-    const tempMap = temp.map(x => helper.vars.emojis.discord.flags[x]);
+    const tempMap = temp.map(x => helper.emojis.discord.flags[x]);
     const newArr: string[] = [];
     for (let i = 0; i < temp.length; i++) {
         let a = '';
